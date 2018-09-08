@@ -7,8 +7,8 @@ LABEL version="7.0.0"
 
 WORKDIR /build
 
-RUN yum install -y wget && \
-    yum clean all && \
+RUN dnf install -y wget && \
+    dnf clean all && \
     wget https://github.com/heketi/heketi/releases/download/v7.0.0/heketi-v7.0.0.linux.arm.tar.gz && \
     wget https://github.com/heketi/heketi/releases/download/v7.0.0/heketi-client-v7.0.0.linux.arm.tar.gz && \
     tar xf heketi-v7.0.0.linux.arm.tar.gz && \ 
@@ -17,7 +17,11 @@ RUN yum install -y wget && \
     cp heketi/heketi-cli /usr/bin/heketi-cli && \
     mkdir /etc/heketi/ && \
     cp heketi/heketi.json /etc/heketi/ && \
-    cp heketi-client/share/heketi/kubernetes/heketi-start.sh /usr/bin/heketi-start.sh
+    cp heketi-client/share/heketi/kubernetes/heketi-start.sh /usr/bin/heketi-start.sh && \
+    rm -rf /build && \
+    dnf remove -y wget && \
+    dnf autoremove && \
+    dnf clean all
 VOLUME /etc/heketi
 RUN mkdir /var/lib/heketi
 VOLUME /var/lib/heketi
