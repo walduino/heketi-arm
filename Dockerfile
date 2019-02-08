@@ -1,18 +1,18 @@
 # set author and base 
 # need to use fedora 27 until glide is fixed in fedora 28 
 # (or we get an alternative glide) 
-FROM arm32v7/fedora:27
+FROM arm64v8/fedora:27
 MAINTAINER David Igou - This is experimental, I don't recommend using this for anything important <igou.david@gmail.com> 
-LABEL version="7.0.0"
+LABEL version="8.0.0"
 
 WORKDIR /build
 
 RUN dnf install -y wget && \
     dnf clean all && \
-    wget https://github.com/heketi/heketi/releases/download/v7.0.0/heketi-v7.0.0.linux.arm.tar.gz && \
-    wget https://github.com/heketi/heketi/releases/download/v7.0.0/heketi-client-v7.0.0.linux.arm.tar.gz && \
-    tar xf heketi-v7.0.0.linux.arm.tar.gz && \ 
-    tar xf heketi-client-v7.0.0.linux.arm.tar.gz && \
+    wget https://github.com/heketi/heketi/releases/download/v8.0.0/heketi-v8.0.0.linux.arm64.tar.gz && \
+    wget https://github.com/heketi/heketi/releases/download/v8.0.0/heketi-client-v8.0.0.linux.arm64.tar.gz && \
+    tar xf heketi-v8.0.0.linux.arm64.tar.gz && \ 
+    tar xf heketi-client-v8.0.0.linux.arm64.tar.gz && \
     cp heketi/heketi /usr/bin/heketi && \
     cp heketi/heketi-cli /usr/bin/heketi-cli && \
     mkdir /etc/heketi/ && \
